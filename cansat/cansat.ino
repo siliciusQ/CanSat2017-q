@@ -31,7 +31,6 @@ void setup() {
 void loop() {
   double temperature, pressure;
   char radioBuff[50];
-  int z;
   
   bmp.getData(temperature, pressure);
   sprintf(radioBuff, "%d:%d", (int)temperature, (int)pressure);
