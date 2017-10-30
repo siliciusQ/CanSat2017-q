@@ -8,11 +8,13 @@ RFM69 radio;
 
 void setup() {
   Serial.begin(9600);
+  delay(2000);
+  Serial.println("Starting initializing...");
 
   radio.initialize(FREQUENCY, NODE_ID, NETWORK_ID);
   radio.setHighPower();
   radio.encrypt(ENCRYPT_KEY);
-  Serial.println("Done initializing...");
+  Serial.println("...Done initializing");
 
 }
 
