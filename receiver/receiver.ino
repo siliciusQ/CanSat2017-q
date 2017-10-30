@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #include <qbcan.h>
 
 #define NODE_ID 1
@@ -33,4 +31,3 @@ void loop() {
   }
 
 }
->>>>>>> newReceiverDefaultCode
