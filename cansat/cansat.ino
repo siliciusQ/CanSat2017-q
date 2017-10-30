@@ -15,6 +15,7 @@ RFM69 radio;
 void setup() {
   // debug
   Serial.begin(9600);
+  delay(2000);
 
   radio.initialize(FREQUENCY, NODE_ID, NETWORK_ID);
   radio.setHighPower();
