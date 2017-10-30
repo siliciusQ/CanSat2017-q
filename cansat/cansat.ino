@@ -1,80 +1,39 @@
-/* 
-    qbcan CanSat example.
-
-    This sketch reads temperature and pressure data and sends it to the Ground station
-*/
-
-//Include the required libraries
 #include <qbcan.h>
-#include <Wire.h>
-#include <SPI.h>
-
-//Pressure sensor object
-BMP180 bmp;
+//#include <Wire.h>
+//#include <SPI.h>
 
 
-//Radio Parameters
-#define NODEID        2    //unique for each node on same network
-#define NETWORKID     100  //the same on all nodes that talk to each other
-#define GATEWAYID     1    //Receiving node
-#define ENCRYPTKEY    "tiro finale" //exactly the same 16 characters/bytes on all nodes!
-
-//Radio object
-char payload[50];
 RFM69 radio;
 
+#define NODE_ID     2   // my ID
+#define NETWORK_ID  100 // my network
+#define GATEWAY_ID  1   // receiver's ID
+
+#define ENCRYPT_KEY "tiro finale"  // must be the same for all nodes
 
 
-
-void setup()
-{
-  //Initialize serial connection for debugging
+void setup() {
+  // debug
   Serial.begin(9600);
-  Serial.println("BOOT");
 
-
-
-  // Initialize pressure sensor.
-  if (bmp.begin())
-    Serial.println("BMP180 init success");
-  else
-  
-  {
-    //In case of error let user know of the problem
-    Serial.println("BMP180 init fail (disconnected?)\n\n");
-    while(1); // Pause forever.
-  }
-
-  //Initialize radio
-  radio.initialize(FREQUENCY,NODEID,NETWORKID);
-  radio.setHighPower(); //To use the high power capabilities of the RFM69HW
-  radio.encrypt(ENCRYPTKEY);
+  radio.initialize(FREQUENCY, NODE_ID, NETWORK_ID);
+  radio.setHighPower();
+  radio.encrypt(ENCRYPT_KEY);
   Serial.println("Transmitting at 433 Mhz");
 
-  
-
 }
 
-void loop()
-{
-  double temperature, pressure;
-  // Get a new pressure reading:
-  bmp.getData(temperature, pressure);
+void loop() {
+  char radioBuff[50];
+  sprintf(radioBuff, "%d", );
 
 
-  //Display data
-  Serial.print("Absolute pressure: ");
-  Serial.print(pressure,2);
-  Serial.println(" mb.");
-  Serial.print("Temperature: ");
-  Serial.print(temperature,2);
-  
+  Serial.print("Buffer: "); Serial.println(radioBuff);
 
-  //Send Data
-  sprintf(payload,"temperature: %d C, pressure: %d mb.",(int)temperature,(int)pressure);
-  Serial.println(payload);
-  radio.send(GATEWAYID, payload, 50);
-  Serial.println("Send complete");
-  
-  delay(500);
+  // send data
+  radio.send(GATEWAY_ID, radioBuff, 50);
 }
+
+
+
+
