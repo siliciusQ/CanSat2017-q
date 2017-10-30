@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
   char radioBuff[50];
-  sprintf(radioBuff, "%d", );
+  sprintf(radioBuff, "%d", millis());
 
 
   Serial.print("Buffer: "); Serial.println(radioBuff);
