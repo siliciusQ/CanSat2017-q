@@ -9,7 +9,6 @@ RFM69 radio;
 
 void setup() {
   Serial.begin(9600);
-<<<<<<< HEAD
   delay(2000);
   Serial.println("Starting initializing...");
 
@@ -17,7 +16,6 @@ void setup() {
   radio.setHighPower();
   radio.encrypt(ENCRYPT_KEY);
   Serial.println("...Done initializing");
-=======
   while(!Serial); // wait for serial to initialize
   
   radio.initialize(FREQUENCY, NODE_ID, NETWORK_ID);
@@ -26,18 +24,28 @@ void setup() {
   
   Serial.println("Done initializing...");
   delay(1000);
->>>>>>> 4823950edd338496b5afcff7c61b39aae718ab53
 
 }
 
-void loop() {
 
+void loop() {
+  
+  
   if (radio.receiveDone()) {
     // print additional info
+    unsigned long messageID = arrayToLong(&radio.DATA[0]);
+    unsigned long messageTime = arrayToLong(&radio.DATA[4]);
+    
+    static unsigned long lastMessageTime = messageTime;
+    
+    unsigned long messageDifference = messageTime - lastMessageTime;
+    lastMessageTime = messageTime;
+    
     
     //print actual message
-    Serial.print("#["); Serial.print(arrayToLong(&radio.DATA[0])); Serial.print("][");
-    Serial.print(arrayToLong(&radio.DATA[4])); Serial.print("]>>");
+    Serial.print("#["); Serial.print(messageID); Serial.print("][");
+    Serial.print(messageDifference); Serial.print("][");
+    Serial.print(messageTime); Serial.print("]>>");
     for (byte i=8; i < radio.DATALEN; i++) {
       Serial.print((char)radio.DATA[i]); //print every byte of message
     }
