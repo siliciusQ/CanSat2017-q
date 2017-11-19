@@ -3,7 +3,8 @@
 
 #include "Arduino.h"
 
-unsigned long longFromArray(byte* start);
+
+#define castArrayTo(a, b) *( (a *) (b) )
 void longToArray(byte* start, unsigned long val);
 
 

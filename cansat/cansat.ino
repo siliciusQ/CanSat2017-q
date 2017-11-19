@@ -34,7 +34,7 @@ void loop() {
 
 
   Serial.print("Buffer: ");
-  Serial.print( longFromArray(&radioBuff[0]) ); Serial.print(" "); Serial.print( longFromArray(&radioBuff[4]) ); Serial.print("\n");
+  Serial.print( castArrayTo(unsigned long, &radioBuff[0]) ); Serial.print(" "); Serial.print(castArrayTo(unsigned long, &radioBuff[4])); Serial.print("\n");
   for(byte c=8; c<RADIO_BUFF_SIZE; ++c){
     Serial.print((char)radioBuff[c]);
   }

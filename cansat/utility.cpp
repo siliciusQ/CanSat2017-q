@@ -2,12 +2,9 @@
 #include "utility.h"
 
 
-unsigned long longFromArray(byte* start) {
-	unsigned long val;
-	for (byte a=0; a<4; ++a)
-		for (byte b=0; b<8; ++b)
-			bitWrite(val, (a*8)+b, bitRead(*(start+a), b));
-	return val;
+unsigned long longFromArray(void* start) {
+	// return a value of any ponter casted to "unisgned long pointer"
+	return *( (unsigned long *) start );
 	
 }
 void longToArray(byte* start, unsigned long val) {
