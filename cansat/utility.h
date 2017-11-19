@@ -4,7 +4,7 @@
 #include "Arduino.h"
 
 unsigned long longFromArray(byte* start);
-void longIntoArray(byte* start, unsigned long val);
+void longToArray(byte* start, unsigned long val);
 
 
 #endif
