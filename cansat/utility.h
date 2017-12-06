@@ -8,4 +8,10 @@
 void longToArray(byte* start, unsigned long val);
 
 
+union Unit {
+	char character;
+	byte data;
+}
+
+
 #endif
