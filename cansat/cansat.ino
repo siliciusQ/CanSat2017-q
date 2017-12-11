@@ -3,7 +3,7 @@
 
 
 #define	NODE_ID			2
-#define	NETWORKD_ID		73
+#define	NETWORK_ID		73
 #define	GATEWAY_ID		1
 #define ENCRYPT_KEY		"SatForBrainlets"
 #define RADIO_BUFF_SIZE	61
@@ -64,7 +64,7 @@ void setup()
 }
 
 
-void arrayCopy(byte *a1, byte *a2, c)
+void arrayCopy(byte *a1, byte *a2, byte c)
 {
 	for (int i=0; i<c; ++i)
 		a1[i] = a2[i];
